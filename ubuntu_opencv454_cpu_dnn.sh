@@ -1,6 +1,7 @@
 sudo apt install build-essential cmake pkg-config unzip yasm git checkinstall -y
 sudo apt install libjpeg-dev libpng-dev libtiff-dev -y
 
+OPENCV_VERSION=4.5.4
 wget -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/$OPENCV_VERSION.zip
 unzip -o opencv.zip
 
