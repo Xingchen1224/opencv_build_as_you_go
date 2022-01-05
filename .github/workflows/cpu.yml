@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-latest, macos-10.15, macos-latest]
         cv_version: [4.5.5, 4.5.4, 4.5.3, 4.5.2, 4.5.1]
     runs-on: ${{ matrix.os }}
     steps:
