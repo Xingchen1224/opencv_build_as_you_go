@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-latest]
-        cv_version: [4.5.4, 4.5.3]
+        cv_version: [4.5.5, 4.5.4, 4.5.3]
     runs-on: ${{ matrix.os }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
