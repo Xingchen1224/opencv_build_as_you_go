@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-latest]
+        cv_version: [4.5.4, 4.5.3]
     runs-on: ${{ matrix.os }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -24,4 +25,4 @@ jobs:
         run: echo Build with $(nproc) threads ...
       
       - name: Build OpenCV DNN CPU
-        run: sh ubuntu_opencv454_cpu_dnn.sh
+        run: sh ubuntu_opencv454_cpu_dnn.sh ${{ matrix.cv_version }}
