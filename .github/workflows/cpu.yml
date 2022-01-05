@@ -8,8 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-ubuntu-20_04:
-    runs-on: ubuntu-20.04
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -22,20 +25,3 @@ jobs:
       
       - name: Build OpenCV DNN CPU
         run: sh ubuntu_opencv454_cpu_dnn.sh
-        
-  build-ubuntu-18_04:
-    runs-on: ubuntu-18.04
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: Install tools
-        run: sh pre-build.sh
-
-      - name: Check threads amount
-        run: echo Build with $(nproc) threads ...
-
-      - name: Build OpenCV DNN CPU
-        run: sh ubuntu_opencv454_cpu_dnn.sh
-        
-        
