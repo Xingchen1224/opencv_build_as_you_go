@@ -1,11 +1,6 @@
 name: Build OpenCV
 
-on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
-  workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   build:
@@ -15,14 +10,10 @@ jobs:
         cv_version: [4.5.5, 4.5.4, 4.5.3, 4.5.2, 4.5.1]
     runs-on: ${{ matrix.os }}
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-#       - name: Install tools
-#         run: sh pre-build.sh
-        
       - name: Check threads amount
         run: echo Build with $(nproc) threads ...
       
       - name: Build OpenCV DNN CPU
-        run: sh ubuntu_cpu_dnn.sh ${{ matrix.cv_version }}
+        run: sh cpu_dnn.sh ${{ matrix.cv_version }}
