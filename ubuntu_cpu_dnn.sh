@@ -1,4 +1,4 @@
-OPENCV_VERSION=4.5.4
+OPENCV_VERSION=$0
 wget -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/$OPENCV_VERSION.zip
 unzip -o opencv.zip
 
