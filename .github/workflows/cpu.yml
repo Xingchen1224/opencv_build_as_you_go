@@ -16,7 +16,7 @@ jobs:
       
       - run: |
           rm -rf opencv*
-          ls -lh /usr/local/lib/ | grep opencv
+          ls -lh /usr/local/lib/
   
       - name: Build OpenCV DNN CPU on Linux
         if: runner.os == 'Linux'
@@ -34,4 +34,4 @@ jobs:
           
         
       - name: List libraries
-        run: ls -lh /usr/local/lib/  | grep opencv
+        run: ls -lh /usr/local/lib/
