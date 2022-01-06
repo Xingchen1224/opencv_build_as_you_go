@@ -11,7 +11,7 @@ cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_CXX_STANDARD=17 \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
--DBUILD_LIST=core,imcodec,imgproc,dnn \
+-DBUILD_LIST=core,imgcodec,imgproc,dnn \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D BUILD_EXAMPLES=OFF ..
 
