@@ -12,11 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Install toolchain
-        if: runner.os == 'Linux'
-        run: sh pre-build.sh
-      
-      - run: ls -lh /usr/local/lib/
+      - run: ls -lh /usr/local/lib | grep opencv
   
       - name: Build OpenCV DNN CPU on Linux
         if: runner.os == 'Linux'
