@@ -15,23 +15,14 @@ jobs:
       - run: |
           rm -rf opencv*
           ls /usr/local/lib/
-      
-      - run: echo Build with $(nproc) threads ...
+  
+      - name: Build OpenCV DNN CPU on Linux
         if: runner.os == 'Linux'
+        run: sh cpu_dnn.sh ${{ matrix.cv_version }} $(nproc)
         
-      - run: echo Build with $(sysctl -n hw.ncpu) threads ...
+      - name: Build OpenCV DNN CPU on macOS
         if: runner.os == 'macOS'
-      
-      - name: Generate OpenCV DNN CPU
-        run: sh cpu_dnn.sh ${{ matrix.cv_version }}
-        
-      - name: Build OpenCV DNN CPU on Ubuntu
-        if: runner.os == 'Linux'
-        run: sudo make -j($nproc) install
-        
-      - name: Build OpenCV DNN CPU on MacOS
-        if: runner.os == 'macOS'
-        run: sudo make -j$(sysctl -n hw.ncpu) install
+        run: sh cpu_dnn.sh ${{ matrix.cv_version }} $(sysctl -n hw.ncpu)
         
       - name: List libraries
         run: ls /usr/local/lib/
