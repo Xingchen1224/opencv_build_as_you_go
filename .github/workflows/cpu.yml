@@ -14,7 +14,7 @@ jobs:
       
       - run: |
           rm -rf opencv*
-          ls /usr/local/lib/
+          ls -lh /usr/local/lib/
   
       - name: Build OpenCV DNN CPU on Linux
         if: runner.os == 'Linux'
@@ -29,4 +29,4 @@ jobs:
           sh cpu_dnn.sh ${{ matrix.cv_version }} $(sysctl -n hw.ncpu)
         
       - name: List libraries
-        run: ls /usr/local/lib/
+        run: ls -lh /usr/local/lib/
