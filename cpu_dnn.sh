@@ -12,5 +12,3 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -DBUILD_LIST=core,imcodec,imgproc,dnn \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D BUILD_EXAMPLES=OFF ..
-
-sudo make -j$(nproc) install
