@@ -15,4 +15,5 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D BUILD_EXAMPLES=OFF ..
 
-sudo make -j$THREAD_AMOUNT install
+cmake --build . --config Release -j $THREADS_AMOUNT
+sudo cmake --install .
