@@ -23,6 +23,6 @@ jobs:
           cd opencv-${{matrix.cv_version}}
           mkdir build
           cd build
-          cmake -D CMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=17 -DBUILD_LIST=core,imgcodecs,imgproc,dnn -DOPENCV_GENERATE_PKGCONFIG=ON -D BUILD_EXAMPLES=OFF ..
+          cmake -D CMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=17 -DBUILD_LIST="core,imgcodecs,imgproc,dnn" -DOPENCV_GENERATE_PKGCONFIG=ON -D BUILD_EXAMPLES=OFF ..
           cmake --build . --config Release -j 2
           cmake --install .
