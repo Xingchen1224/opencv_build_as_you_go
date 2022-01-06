@@ -12,19 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: ls -lh /usr/local/lib | grep opencv
-  
-      - name: Build OpenCV DNN CPU on Linux
+      - name: List libraries before build.
+        run: ls -lh /usr/local/lib
+      
+      - name: Build OpenCV DNN CPU on Linux.
         if: runner.os == 'Linux'
         run: |
           echo Will build opencv ${{ matrix.cv_version }} on ${{runner.os}}.
           sh cpu_dnn.sh ${{ matrix.cv_version }} $(nproc)
           
-      - name: Build OpenCV DNN CPU on macOS
+      - name: Build OpenCV DNN CPU on macOS.
         if: runner.os == 'macOS'
         run: |
           echo Will build opencv ${{ matrix.cv_version }} on ${{runner.os}}.
           sh cpu_dnn.sh ${{ matrix.cv_version }}
         
-      - name: List libraries
+      - name: List libraries and check build result.
         run: ls -lh /usr/local/lib | grep opencv
