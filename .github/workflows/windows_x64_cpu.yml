@@ -1,0 +1,25 @@
+name: Build OpenCV windows-x64
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-2019, windows-2022]
+        cv_version: [4.5.5, 4.5.4, 4.5.3]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Download OpenCV.
+        run: |
+          Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{matrix.cv_version}}.zip -OutFile opencv.zip
+          7z x ./opencv.zip
+          
+      - name: Build OpenCV.
+        run: |
+          cd opencv
+          mkdir build; cd build; cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_CXX_STANDARD=17 -DBUILD_LIST=core,imgcodecs,imgproc,dnn -D OPENCV_GENERATE_PKGCONFIG=ON -D BUILD_EXAMPLES=OFF ..
+          cmake --build . --config Release -j 2
+          cmake --install .
