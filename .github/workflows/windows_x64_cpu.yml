@@ -16,6 +16,7 @@ jobs:
         run: |
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{matrix.cv_version}}.zip -OutFile opencv.zip
           7z x ./opencv.zip
+          ls
           
       - name: Build OpenCV.
         run: |
