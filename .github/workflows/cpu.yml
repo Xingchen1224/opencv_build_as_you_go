@@ -6,8 +6,6 @@ jobs:
   build:
     strategy:
       matrix:
-        # os: [ubuntu-18.04, macos-10.15]
-        # cv_version: [4.5.5]
         os: [ubuntu-18.04, ubuntu-20.04, macos-10.15, macos-11]
         cv_version: [4.5.5, 4.5.4, 4.5.3]
     runs-on: ${{ matrix.os }}
@@ -18,24 +16,19 @@ jobs:
         if: runner.os == 'Linux'
         run: sh pre-build.sh
       
-      - run: |
-          rm -rf opencv*
-          ls -lh /usr/local/lib/
+      - run: ls -lh /usr/local/lib/
   
       - name: Build OpenCV DNN CPU on Linux
         if: runner.os == 'Linux'
         run: |
-          echo Will build opencv ${{ matrix.cv_version }} with $(nproc) threads on ${{runner.os}}.
+          echo Will build opencv ${{ matrix.cv_version }} on ${{runner.os}}.
           sh cpu_dnn.sh ${{ matrix.cv_version }} $(nproc)
-        # run: echo Will build opencv ${{ matrix.cv_version }} with $(nproc) threads on ${{runner.os}}.
-        
+          
       - name: Build OpenCV DNN CPU on macOS
         if: runner.os == 'macOS'
         run: |
-          echo Will build opencv ${{ matrix.cv_version }} with $(sysctl -n hw.ncpu) threads on ${{runner.os}}.
-          sh cpu_dnn.sh ${{ matrix.cv_version }} $(sysctl -n hw.ncpu)
-        # run: echo Will build opencv ${{ matrix.cv_version }} with $(sysctl -n hw.ncpu) threads on ${{runner.os}}.
-          
+          echo Will build opencv ${{ matrix.cv_version }} on ${{runner.os}}.
+          sh cpu_dnn.sh ${{ matrix.cv_version }}
         
       - name: List libraries
         run: ls -lh /usr/local/lib | grep opencv
