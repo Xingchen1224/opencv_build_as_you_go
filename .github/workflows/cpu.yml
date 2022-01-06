@@ -6,14 +6,24 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-latest, macos-10.15, macos-latest]
+        os: [ubuntu-18.04, ubuntu-20.04, macos-10.15, macos-11]
         cv_version: [4.5.5, 4.5.4, 4.5.3, 4.5.2, 4.5.1]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       
-      - name: Check threads amount
-        run: echo Build with $(nproc) threads ...
+      - run: |
+          rm -rf opencv*
+          ll /usr/local/lib/
       
-      - name: Build OpenCV DNN CPU
-        run: sh cpu_dnn.sh ${{ matrix.cv_version }}
+      - run: echo Build with $(nproc) threads ...
+        if: runner.os == 'Linux'
+        
+      - run: echo Build with $(sysctl -n hw.ncpu) threads ...
+        if: runner.os == 'macOS'
+      
+#       - name: Build OpenCV DNN CPU
+#         run: sh cpu_dnn.sh ${{ matrix.cv_version }}
+        
+      - name: List libraries
+        run: ll /usr/local/lib/
