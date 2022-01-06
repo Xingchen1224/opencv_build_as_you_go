@@ -1,8 +1,8 @@
 OPENCV_VERSION=$1
 THREAD_AMOUNT=$2
 
-wget -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/$OPENCV_VERSION.zip
-unzip -o opencv.zip
+wget -O opencv.zip -q https://github.com/opencv/opencv/archive/refs/tags/$OPENCV_VERSION.zip
+unzip -qq opencv.zip
 
 cd opencv-$OPENCV_VERSION
 mkdir build
