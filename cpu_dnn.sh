@@ -1,4 +1,6 @@
 OPENCV_VERSION=$1
+THREAD_AMOUNT=$2
+
 wget -O opencv.zip https://github.com/opencv/opencv/archive/refs/tags/$OPENCV_VERSION.zip
 unzip -o opencv.zip
 
@@ -12,3 +14,5 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -DBUILD_LIST=core,imcodec,imgproc,dnn \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D BUILD_EXAMPLES=OFF ..
+
+sudo make -j$THREAD_AMOUNT install
