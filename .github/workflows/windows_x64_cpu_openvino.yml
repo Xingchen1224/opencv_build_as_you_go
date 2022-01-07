@@ -1,0 +1,28 @@
+name: Build OpenCV windows-x64-OpenVINO
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-2019, windows-2022]
+        cv_version: [4.5.5, 4.5.4, 4.5.3]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Download OpenCV.
+        run: |
+          Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{matrix.cv_version}}.zip -OutFile opencv.zip
+          7z x ./opencv.zip
+          ls
+          
+      - name: Build OpenCV.
+        run: |
+          cd opencv-${{matrix.cv_version}}
+          mkdir build
+          cd build
+          cmake -DCMAKE_INSTALL_PREFIX=deployment -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=17 -DBUILD_LIST="core,imgcodecs,imgproc,dnn" -DOPENCV_GENERATE_PKGCONFIG=ON -DWITH_INF_ENGINE=ON -DINF_ENGINE_RELEASE=2021040000 -DBUILD_EXAMPLES=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF ..
+          cmake --build . --config Release -j 2
+          cmake --install .
