@@ -20,6 +20,7 @@ jobs:
         run: |
           echo Will build opencv ${{ matrix.cv_version }} on ${{runner.os}}.
           sh cpu_dnn.sh ${{ matrix.cv_version }} $(nproc)
+          sh with_vcpkg.sh
           
       - name: Build OpenCV DNN CPU on macOS.
         if: runner.os == 'macOS'
