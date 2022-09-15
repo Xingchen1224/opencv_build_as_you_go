@@ -6,7 +6,7 @@ sudo apt install git -y
 
 sudo apt install curl zip unzip tar -y
 
-ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+sudo ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 sudo apt install build-essential tar curl zip unzip libxcursor-dev libgtk2.0-dev -y
 
