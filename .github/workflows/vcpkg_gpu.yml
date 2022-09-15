@@ -20,6 +20,7 @@ jobs:
 
       - run: nvcc -V
       
+      - uses: actions/checkout@v2
       - name: Build OpenCV DNN GPU on Linux.
         if: runner.os == 'Linux'
         run: |
